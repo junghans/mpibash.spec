@@ -1,0 +1,3 @@
+# mpibash
+
+The mpibash package
