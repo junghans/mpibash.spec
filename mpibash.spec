@@ -1,5 +1,5 @@
 Name:           mpibash
-Version:        1.2
+Version:        1.3
 Release:        1%{?dist}
 Summary:        Parallel scripting right from the Bourne-Again Shell
 License:        GPLv3+
@@ -18,6 +18,7 @@ operation X before any worker is allowed to begin operation Y).
 %package openmpi
 Summary:        Mpibash Open MPI binaries and libraries
 BuildRequires:  openmpi-devel
+BuildRequires:  libcircle-openmpi-devel
 
 %description openmpi
 MPI-Bash makes it possible to parallelize Bash scripts which run a set of
@@ -32,6 +33,7 @@ mpibash compiled with Open MPI, package incl. binaries and libraries
 %package mpich
 Summary:        Mpibash MPICH binaries and libraries
 BuildRequires:  mpich-devel
+BuildRequires:  libcircle-mpich-devel
 
 %description mpich
 MPI-Bash makes it possible to parallelize Bash scripts which run a set of
@@ -96,7 +98,7 @@ sed -i '1s@/usr/bin/env mpibash@%{_libdir}/mpich/bin/mpibash@' %{buildroot}/%{_l
 %files openmpi
 %{_libdir}/openmpi/bin/m*
 %{_mandir}/openmpi*/man1/m*
-%{_libdir}/openmpi/lib/%{name}/%{name}.so
+%{_libdir}/openmpi/lib/%{name}
 
 %files openmpi-examples
 %{_libdir}/openmpi/lib/share/%{name}/examples
@@ -104,11 +106,14 @@ sed -i '1s@/usr/bin/env mpibash@%{_libdir}/mpich/bin/mpibash@' %{buildroot}/%{_l
 %files mpich
 %{_libdir}/mpich/bin/m*
 %{_mandir}/mpich*/man1/m*
-%{_libdir}/mpich/lib/%{name}/%{name}.so
+%{_libdir}/mpich/lib/%{name}
 
 %files mpich-examples
 %{_libdir}/mpich/lib/share/%{name}/examples
 
 %changelog
+* Thu Dec 07 2017 Christoph Junghans <junghans@votca.org> - 1.3-1
+- Version bump to v1.3, enable libcircle support
+
 * Tue Nov 14 2017 Christoph Junghans <junghans@votca.org> - 1.2-1
 - Initial commit of v1.2 
