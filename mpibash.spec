@@ -1,6 +1,6 @@
 Name:           mpibash
 Version:        1.3
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Parallel scripting right from the Bourne-Again Shell
 License:        GPLv3+
 Url:            https://github.com/lanl/MPI-Bash
@@ -92,8 +92,8 @@ popd
 %make_install -C mpich
 # Fix shebang
 sed -i '1s@/usr/bin/env bash@/bin/bash@' %{buildroot}/%{_libdir}/*mpi*/bin/mpibash*
-sed -i '1s@/usr/bin/env mpibash@%{_libdir}/openmpi/bin/mpibash@' %{buildroot}/%{_libdir}/openmpi/lib/share/%{name}/examples/* %{buildroot}/%{_libdir}/openmpi/bin/m*
-sed -i '1s@/usr/bin/env mpibash@%{_libdir}/mpich/bin/mpibash@' %{buildroot}/%{_libdir}/mpich/lib/share/%{name}/examples/* %{buildroot}/%{_libdir}/mpich/bin/m*
+sed -i '1s@/usr/bin/env mpibash@%{_libdir}/openmpi/bin/mpibash_openmpi@' %{buildroot}/%{_libdir}/openmpi/lib/share/%{name}/examples/* %{buildroot}/%{_libdir}/openmpi/bin/m*
+sed -i '1s@/usr/bin/env mpibash@%{_libdir}/mpich/bin/mpibash_mpich@' %{buildroot}/%{_libdir}/mpich/lib/share/%{name}/examples/* %{buildroot}/%{_libdir}/mpich/bin/m*
 
 %files openmpi
 %{_libdir}/openmpi/bin/m*
@@ -112,6 +112,9 @@ sed -i '1s@/usr/bin/env mpibash@%{_libdir}/mpich/bin/mpibash@' %{buildroot}/%{_l
 %{_libdir}/mpich/lib/share/%{name}/examples
 
 %changelog
+* Mon Dec 11 2017 Christoph Junghans <junghans@votca.org> - 1.3-2
+- Fix shebang in scripts to contain _${MPI_SUFFIX}
+
 * Thu Dec 07 2017 Christoph Junghans <junghans@votca.org> - 1.3-1
 - Version bump to v1.3, enable libcircle support
 
