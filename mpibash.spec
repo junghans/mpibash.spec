@@ -1,6 +1,6 @@
 Name:           mpibash
 Version:        1.3
-Release:        7%{?dist}
+Release:        8%{?dist}
 Summary:        Parallel scripting right from the Bourne-Again Shell
 License:        GPLv3+
 Url:            https://github.com/lanl/MPI-Bash
@@ -71,18 +71,19 @@ This package contains example scripts for mpibash compiled with MPICH.
 
 %build
 mkdir openmpi mpich
-%global dconfigure %(printf %%s '%configure' | sed 's!\./configure!../configure!g')
+%global _configure ../configure
+
 
 pushd openmpi
 %{_openmpi_load}
-%dconfigure --with-bashdir=/usr/include/bash --docdir=${MPI_LIB}/share/%{name} --with-plugindir=${MPI_LIB}/%{name}/ --bindir=${MPI_BIN} --mandir=${MPI_MAN} --program-suffix=${MPI_SUFFIX} CC=mpicc
+%configure --with-bashdir=/usr/include/bash --docdir=${MPI_LIB}/share/%{name} --with-plugindir=${MPI_LIB}/%{name}/ --bindir=${MPI_BIN} --mandir=${MPI_MAN} --program-suffix=${MPI_SUFFIX} CC=mpicc
 %make_build
 %{_openmpi_unload}
 popd
 
 pushd mpich
 %{_mpich_load}
-%dconfigure --with-bashdir=/usr/include/bash --docdir=${MPI_LIB}/share/%{name} --with-plugindir=${MPI_LIB}/%{name}/ --bindir=${MPI_BIN} --mandir=${MPI_MAN} --program-suffix=${MPI_SUFFIX} CC=mpicc
+%configure --with-bashdir=/usr/include/bash --docdir=${MPI_LIB}/share/%{name} --with-plugindir=${MPI_LIB}/%{name}/ --bindir=${MPI_BIN} --mandir=${MPI_MAN} --program-suffix=${MPI_SUFFIX} CC=mpicc
 %make_build
 %{_mpich_unload}
 popd
@@ -112,6 +113,9 @@ sed -i '1s@/usr/bin/env mpibash@%{_libdir}/mpich/bin/mpibash_mpich@' %{buildroot
 %{_libdir}/mpich/lib/share/%{name}/examples
 
 %changelog
+* Fri Jan 17 2020 Jeff Law <law@redhat.com> - 1.3-e
+- Redefine _configure and use standard %configure macro
+
 * Thu Jul 25 2019 Fedora Release Engineering <releng@fedoraproject.org> - 1.3-7
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_31_Mass_Rebuild
 
