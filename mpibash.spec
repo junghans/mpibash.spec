@@ -5,6 +5,7 @@ Summary:        Parallel scripting right from the Bourne-Again Shell
 License:        GPLv3+
 Url:            https://github.com/lanl/MPI-Bash
 Source0:        https://github.com/lanl/MPI-Bash/releases/download/v%{version}/mpibash-%{version}.tar.gz
+BuildRequires: make
 BuildRequires:  bash-devel >= 4.4
 
 %description
