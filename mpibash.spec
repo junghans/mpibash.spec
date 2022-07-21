@@ -1,6 +1,6 @@
 Name:           mpibash
 Version:        1.3
-Release:        13%{?dist}
+Release:        14%{?dist}
 Summary:        Parallel scripting right from the Bourne-Again Shell
 License:        GPLv3+
 Url:            https://github.com/lanl/MPI-Bash
@@ -114,6 +114,9 @@ sed -i '1s@/usr/bin/env mpibash@%{_libdir}/mpich/bin/mpibash_mpich@' %{buildroot
 %{_libdir}/mpich/lib/share/%{name}/examples
 
 %changelog
+* Thu Jul 21 2022 Fedora Release Engineering <releng@fedoraproject.org> - 1.3-14
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_37_Mass_Rebuild
+
 * Thu Jan 20 2022 Fedora Release Engineering <releng@fedoraproject.org> - 1.3-13
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_36_Mass_Rebuild
 
