@@ -1,0 +1,18 @@
+Avoid implicit declaration of execute_shell_function by including
+"execute_cmd.h".  This prevents a build failure with future compilers
+which do not support implicit function declarations by default.
+
+Submitted upstream: <https://github.com/lanl/MPI-Bash/pull/18>
+
+diff --git a/src/circle-init.c b/src/circle-init.c
+index da605ae5b20a637d..3b232c85b8936f55 100644
+--- a/src/circle-init.c
++++ b/src/circle-init.c
+@@ -5,6 +5,7 @@
+  *********************************************************/
+ 
+ #include "circlebash.h"
++#include "execute_cmd.h"
+ 
+ /* Define our library-local variables in an ad hoc namespace. */
+ SHELL_VAR *circlebash_create_func = NULL;   /* User-defined callback function for CIRCLE_cb_create. */
