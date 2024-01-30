@@ -1,6 +1,6 @@
 Name:           mpibash
 Version:        1.3
-Release:        18%{?dist}
+Release:        19%{?dist}
 Summary:        Parallel scripting right from the Bourne-Again Shell
 License:        GPLv3+
 Url:            https://github.com/lanl/MPI-Bash
@@ -8,6 +8,10 @@ Source0:        https://github.com/lanl/MPI-Bash/releases/download/v%{version}/m
 Patch0: mpibash-c99.patch
 BuildRequires: make
 BuildRequires:  bash-devel >= 4.4
+
+# Prevent generation of a file dependency on ourselves
+# https://bugzilla.redhat.com/show_bug.cgi?id=2229948
+%global __requires_exclude ^%{_libdir}/.*/bin/.*
 
 %description
 MPI-Bash makes it possible to parallelize Bash scripts which run a set of
@@ -115,6 +119,9 @@ sed -i '1s@/usr/bin/env mpibash@%{_libdir}/mpich/bin/mpibash_mpich@' %{buildroot
 %{_libdir}/mpich/lib/share/%{name}/examples
 
 %changelog
+* Tue Jan 30 2024 Zbigniew Jedrzejewski-Szmek <zbyszek@in.waw.pl> - 1.3-19
+- Suppress internal file depedency
+
 * Thu Jan 25 2024 Fedora Release Engineering <releng@fedoraproject.org> - 1.3-18
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_40_Mass_Rebuild
 
