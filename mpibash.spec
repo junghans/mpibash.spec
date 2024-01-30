@@ -13,43 +13,33 @@ BuildRequires:  bash-devel >= 4.4
 # https://bugzilla.redhat.com/show_bug.cgi?id=2229948
 %global __requires_exclude ^%{_libdir}/.*/bin/.*
 
-%description
-MPI-Bash makes it possible to parallelize Bash scripts which run a set of
-Linux commands independently over a large number of input files.
-Because MPI-Bash includes various MPI functions for data transfer and
-synchronization, it is not limited to parallel workloads
-but can incorporate phased operations (i.e. all workers must finish
-operation X before any worker is allowed to begin operation Y).
+%global _description %{expand:
+This package makes it possible to parallelize bash scripts which run a set of
+Linux commands independently over a large number of input files. Because mpibash
+includes various MPI functions for data transfer and synchronization, it is not
+limited to parallel workloads, but can incorporate phased operations where all
+workers must finish operation X before any worker is allowed to begin
+operation Y.}
+
+%description %_description
 
 %package openmpi
 Summary:        Mpibash Open MPI binaries and libraries
 BuildRequires:  openmpi-devel
 BuildRequires:  libcircle-openmpi-devel
 
-%description openmpi
-MPI-Bash makes it possible to parallelize Bash scripts which run a set of
-Linux commands independently over a large number of input files.
-Because MPI-Bash includes various MPI functions for data transfer and
-synchronization, it is not limited to parallel workloads
-but can incorporate phased operations (i.e. all workers must finish
-operation X before any worker is allowed to begin operation Y).
+%description openmpi  %_description
 
-mpibash compiled with Open MPI, package incl. binaries and libraries
+mpibash compiled with Open MPI, package incl. binaries and libraries.
 
 %package mpich
 Summary:        Mpibash MPICH binaries and libraries
 BuildRequires:  mpich-devel
 BuildRequires:  libcircle-mpich-devel
 
-%description mpich
-MPI-Bash makes it possible to parallelize Bash scripts which run a set of
-Linux commands independently over a large number of input files.
-Because MPI-Bash includes various MPI functions for data transfer and
-synchronization, it is not limited to parallel workloads
-but can incorporate phased operations (i.e. all workers must finish
-operation X before any worker is allowed to begin operation Y).
+%description mpich  %_description
 
-mpibash compiled with MPICH, package incl. binaries and libraries
+mpibash compiled with MPICH, package incl. binaries and libraries.
 
 %package openmpi-examples
 Summary:        Example Scripts for Open MPI %{name}
