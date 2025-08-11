@@ -2,10 +2,10 @@ name: CI
 on:
   push:
     branches:
-      - rawhide
+      - github
   pull_request:
     branches:
-      - rawhide
+      - github
 
 concurrency:
   group: ${ {github.event_name }}-${{ github.workflow }}-${{ github.ref }}
